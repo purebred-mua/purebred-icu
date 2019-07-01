@@ -1,0 +1,46 @@
+cabal-version:       2.4
+name:                purebred-icu
+version:             0.1.0.0
+synopsis:            ICU charset support for purebred
+description:
+  .
+  This library can be used to add support for many more charsets
+  to the purebred MUA.  It uses the /text-icu/ library (and /libicu/
+  under the hood) to convert text.
+  .
+  To use:
+  .
+  @
+  import qualified Purebred.Plugin.ICU
+  main = purebred $ tweak defaultConfig where
+    tweak = Purebred.Plugin.ICU.enable
+  @
+
+homepage:            https://github.com/purebred-mua/purebred-icu
+license:             AGPL-3.0-or-later
+license-file:        LICENSE
+author:              Fraser Tweedale
+maintainer:          frase@frase.id.au
+copyright:           2019  Fraser Tweedale
+category:            Email
+build-type:          Simple
+
+-- tested-with:
+  --GHC==8.0.2, GHC==8.2.2, GHC==8.4.4, GHC==8.6.3
+
+source-repository head
+  type: git
+  location: https://github.com/purebred-mua/purebred-icu.git
+
+library
+  hs-source-dirs:      src
+  ghc-options:         -Wall
+  default-language:    Haskell2010
+  exposed-modules:     Purebred.Plugin.ICU
+  build-depends:       base >= 4.9 && < 5
+                     , purebred
+                     , purebred-email >= 0.2
+                     , case-insensitive
+                     , lens
+                     , text
+                     , text-icu
