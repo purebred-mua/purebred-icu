@@ -19,7 +19,16 @@
 Add support for many more charsets to the purebred MUA.  It uses the
 /text-icu/ library (and /libicu/ under the hood) to convert text.
 
-To enable text-icu:
+Usage:
+
+@
+import Purebred
+import qualified Purebred.Plugin.ICU
+
+main = purebredWithPlugins [Purebred.Plugin.ICU.plugin, ...]
+@
+
+Or for pre-plugins Purebred:
 
 @
 import Purebred
@@ -34,15 +43,15 @@ main = purebred $ tweak defaultConfig
 -}
 module Purebred.Plugin.ICU
   (
-    icuCharsets
+    plugin
   , enable
+  , icuCharsets
   ) where
 
 import Control.Applicative ((<|>), liftA2)
 import Control.Exception (catch)
 import System.IO.Unsafe (unsafePerformIO)
 
-import Control.Lens (over)
 import Data.CaseInsensitive (original)
 import Data.MIME (CharsetLookup)
 import Data.Text as T
@@ -50,7 +59,14 @@ import Data.Text.Encoding as T
 import Data.Text.Encoding.Error as T
 import Data.Text.ICU.Convert (open, toUnicode)
 import Data.Text.ICU.Error (ICUError)
+
+import Paths_purebred_icu (version)
 import Purebred
+import Purebred.Plugin
+
+-- | Plugin to be used with purebred plugin framework
+plugin :: Plugin (ConfigHook Pure)
+plugin = Plugin "Purebred.Plugin.ICU" version (ConfigHook (pure . enable))
 
 -- | Install the ICU charsets, preserving and preferring the
 -- existing lookup function.

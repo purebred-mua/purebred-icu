@@ -37,10 +37,11 @@ library
   ghc-options:         -Wall
   default-language:    Haskell2010
   exposed-modules:     Purebred.Plugin.ICU
+  other-modules:       Paths_purebred_icu
+  autogen-modules:     Paths_purebred_icu
   build-depends:       base >= 4.9 && < 5
                      , purebred
                      , purebred-email >= 0.2
                      , case-insensitive
-                     , lens
                      , text
                      , text-icu
