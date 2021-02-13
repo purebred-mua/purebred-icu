@@ -31,12 +31,6 @@ This library can be used to add support for many more charsets to the purebred
 MUA. It uses the /text-icu/ library (and /libicu/ under the hood) to convert
 text.
 
-To use:
-
-' import qualified Purebred.Plugin.ICU main = purebred $ tweak defaultConfig
-where tweak = Purebred.Plugin.ICU.enable '.
-
-
 %package -n ghc-%{name}
 Summary:        Haskell %{name} library
 

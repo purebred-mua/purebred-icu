@@ -28,18 +28,6 @@ import qualified Purebred.Plugin.ICU
 main = purebredWithPlugins [Purebred.Plugin.ICU.plugin, ...]
 @
 
-Or for pre-plugins Purebred:
-
-@
-import Purebred
-import qualified Purebred.Plugin.ICU
-
-main = purebred $ tweak defaultConfig
-  where
-    tweak :: UserConfiguration -> UserConfiguration
-    tweak = 'Purebred.Plugin.ICU.enable'
-@
-
 -}
 module Purebred.Plugin.ICU
   (

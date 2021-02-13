@@ -14,22 +14,25 @@ you can use a [ cabal project file
 
     # clone purebred-icu as well into an adjacent directory to purebred
     # and make cabal aware of purebred *and* purebred-icu necessary to build
-    echo "packages: .,../purebred-icu" > cabal.project.local
+    echo "packages: ., ../purebred-icu" > cabal.project.local
 
     # install purebred and the purebred-icu plugin
-    $ cabal --enable-nix new-install --overwrite-policy=always exe:purebred lib:purebred-icu
+    $ cabal install exe:purebred
+    $ cabal install --lib purebred-icu
 
-To run purebred enable the plugin in the config:
+Enable the plugin in `~/.config/purebred/purebred.hs`:
 
 ```Haskell
 import Purebred
 import qualified Purebred.Plugin.ICU
 
 main :: IO ()
-main = purebred $ tweak defaultConfig where
-  tweak = Purebred.Plugin.ICU.enable
+main = purebred
+  [ Purebred.Plugin.ICU.plugin
+  -- , other plugins
+  ]
 ```
 
-Then run purebred:
+Then run Purebred (assuming your cabal bindir is on `PATH`):
 
-    $ ~/.cabal/bin/purebred
+    $ purebred

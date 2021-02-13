@@ -12,8 +12,10 @@ description:
   .
   @
   import qualified Purebred.Plugin.ICU
-  main = purebred $ tweak defaultConfig where
-    tweak = Purebred.Plugin.ICU.enable
+  main = purebred
+    [ Purebred.Plugin.ICU.plugin
+    -- , other plugins
+    ]
   @
 
 homepage:            https://github.com/purebred-mua/purebred-icu
